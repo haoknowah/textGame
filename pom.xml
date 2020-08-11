@@ -3,7 +3,7 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xs
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>Noahs</groupId>
 	<artifactId>txtGame</artifactId>
-    <version>0.1.0</version>
+    <version>0.1.2</version>
     <name>project0-Noah</name>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
