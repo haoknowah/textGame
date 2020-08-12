@@ -3,7 +3,7 @@ import java.util.logging.Logger;
 public class Character extends Alive{
     
     public HashMap<String, Integer> choices;
-    private Character(){
+    public Character(){
         this.setLvl(1);
         this.setHp(10 + (2 * this.lvl));
         this.setMhp(10 + (2 * this.lvl));
