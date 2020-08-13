@@ -1,5 +1,6 @@
 import java.util.Random;
 import java.util.Scanner;
+import java.util.Properties;
 public class App {
 
     protected static Character player;
