@@ -29,6 +29,9 @@ public abstract class Alive {
     public int getXp(){
         return this.xp;
     }
+    public int getLvl(){
+        return this.lvl;
+    }
     public void setXp(int exp, boolean reset){
         if(reset == true){
             this.xp = 0;
