@@ -1,3 +1,4 @@
+import java.util.Arrays;
 public abstract class Alive {
     protected int hp;
     protected int mhp;
@@ -6,7 +7,8 @@ public abstract class Alive {
     protected int lvl;
     protected int mag;
     protected int xp;
-    protected int slots;
+    protected String[] slots;
+    protected int totalSlots;
     public void lvlup(){
         this.lvl = this.lvl + 1;
         this.setXp(0, true);
@@ -71,6 +73,9 @@ public abstract class Alive {
     }
     public void setMag(int x){
         this.mag = x;
+    }
+    public String[] initSlots(int lev){
+        return slots = new String[(int)((lev / 5) + 1)];
     }
     public void setSlots(int x){
         this.slots = x;

@@ -1,5 +1,6 @@
 import java.util.HashMap;
 import java.util.logging.Logger;
+import java.util.Arrays;
 public class Character extends Alive{
     
     public HashMap<String, Integer> choices;
@@ -11,7 +12,7 @@ public class Character extends Alive{
         this.setDef(this.lvl);
         this.setMag((int)(0.5 * this.lvl));
         this.setXp(0, false);
-        this.setSlots((int)(this.lvl / 5) + 1);
+        this.initSlots(this.getLvl());
         this.choices = new HashMap<>();
         this.choices.put("atk", 0);
         this.choices.put("def", 0);

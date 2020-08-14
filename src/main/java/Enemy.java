@@ -11,7 +11,7 @@ public class Enemy extends Alive{
         this.setDef(this.lvl);
         this.setMag((int)(0.5 * this.lvl));
         this.setXp(0, false);
-        this.setSlots((int)(this.lvl / 5) + 1);
+        this.initSlots(this.getLvl());
     }    
     public boolean bossStat(){
         return this.boss;
