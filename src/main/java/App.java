@@ -102,5 +102,11 @@ public class App {
             }
             break;
         }
+        if(npcAlive == true){   
+            int eAtkRoll = rand.nextInt(20);
+            int eDmg = -(npc.getAtk() + eAtkRoll - player.getDef());
+            playerAlive = player.damageHp(eDmg);
+            System.out.println("Took " + -eDmg + " damage.");
+        }
     }
 }
