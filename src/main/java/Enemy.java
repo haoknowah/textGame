@@ -5,8 +5,8 @@ public class Enemy extends Alive{
         this.setLvl(lv);
         this.boss = bos;
         this.regen = 0;
-        this.setHp(10 + (2 * this.lvl));
         this.setMhp(10 + (2 * this.lvl));
+        this.setHp(10 + (2 * this.lvl));
         this.setAtk(1 + this.lvl);
         this.setDef(this.lvl);
         this.setMag((int)(0.5 * this.lvl));

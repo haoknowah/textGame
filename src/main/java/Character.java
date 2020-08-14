@@ -5,8 +5,8 @@ public class Character extends Alive{
     public HashMap<String, Integer> choices;
     public Character(){
         this.setLvl(1);
-        this.setHp(10 + (2 * this.lvl));
-        this.setMhp(10 + (2 * this.lvl));
+        this.setMhp(10 + (2 * this.getLvl()));
+        this.setHp(10 + (2 * this.getLvl()));
         this.setAtk(1 + this.lvl);
         this.setDef(this.lvl);
         this.setMag((int)(0.5 * this.lvl));

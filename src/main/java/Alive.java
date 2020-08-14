@@ -18,10 +18,10 @@ public abstract class Alive {
         return this.def;
     }
     public int getHp(){
-        return this.hp;
+        return hp;
     }
     public int getMhp(){
-        return this.mhp;
+        return mhp;
     }
     public int getMag(){
         return this.mag;
@@ -40,7 +40,7 @@ public abstract class Alive {
             this.xp = this.xp + exp;
         }
     }
-    public boolean setHp(int dmg){
+    public boolean damageHp(int dmg){
         this.hp = this.hp + dmg;
         if(hp <= 0){
             System.out.println("Game Over");
@@ -52,6 +52,12 @@ public abstract class Alive {
         }
         else{
             return true;
+        }
+    }
+    public void setHp(int x){
+        this.hp = x;
+        if(hp > this.mhp){
+            this.hp = mhp;
         }
     }
     public void setMhp(int x){
