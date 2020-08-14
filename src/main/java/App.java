@@ -60,6 +60,7 @@ public class App {
         String dungeon = config.getProperty("dungeon");
         String name = config.getProperty("player");
         int menuSelect = 0;
+        boolean cont = true;
         Enemy npc = new Enemy(1, false);
         boolean npcAlive = true;
         System.out.println("-----------Player----------");
@@ -69,7 +70,7 @@ public class App {
             + "| DEF: " + player.getDef() + "| MAG: " +
             player.getMag());
         System.out.println("1: attack");
-        System.out.println("2: magic/skill");
+        System.out.println("2: magic");
         System.out.println("3: observe");
         System.out.println("4: flee");
         try {
@@ -83,13 +84,22 @@ public class App {
             int dmg = -(player.getAtk() + atkRoll - npc.getDef());
             npcAlive = npc.damageHp(dmg);
             System.out.println("Dealt " + -dmg + " damage.");
-            System.out.println(npc.getHp());
             break;
             case 2:
             break;
             case 3:
+            System.out.println("LVL: " + npc.getLvl() + "| HP: "+ 
+                npc.getHp() + "/" + npc.getMhp() + "| ATK: " +
+                npc.getAtk() +  "| DEF: " + npc.getDef() +
+                "| MAG: " + npc.getMag());
             break;
             case 4:
+            if(npc.bossStat() == false){
+                cont = false;
+            }
+            else{
+                System.out.println("Can't escape.");
+            }
             break;
         }
     }
