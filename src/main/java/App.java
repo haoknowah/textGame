@@ -89,6 +89,32 @@ public class App {
             System.out.println("Dealt " + -dmg + " damage.");
             break;
             case 2:
+            int spellSelect = -1;
+            for(int i = 0; i < player.getTotalSlots() - 1; i++){
+                System.out.println(i + ": " + player.getSlot(i).getName());
+            }
+            try {
+                spellSelect = Integer.parseInt(in.nextLine());
+            }  catch (Exception InputMismatchException) {
+                System.out.println("Enter a number you dolt.");
+            }
+            Spells chose = player.getSlot(spellSelect);
+            if(chose.getBuff() == false){
+                int mAtkRoll = rand.nextInt(20);
+                int mDmg = -((int) (player.getMag() * 0.75) + mAtkRoll - 
+                    npc.getDef() + chose.getDmg());
+                if(mDmg < 0){
+                    mDmg = 0;
+                }
+                npcAlive = npc.damageHp(mDmg);
+                System.out.println("Dealt " + -mDmg + " damage.");
+            }
+            else{
+                int heal = (int) (player.getMag() * 0.75) +
+                     chose.getDmg();
+                player.damageHp(heal);
+                System.out.println("Healed " + heal + " damage.");
+            }
             break;
             case 3:
             System.out.println("LVL: " + npc.getLvl() + "| HP: "+ 

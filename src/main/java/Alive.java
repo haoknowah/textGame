@@ -87,4 +87,15 @@ public abstract class Alive {
     public int getTotalSlots(){
         return this.totalSlots;
     }
+    public Spells[] getSlots(){
+        return this.slots;
+    }
+    public Spells getSlot(int i){
+        try {
+            return this.slots[i];
+        } catch(Exception IndexOutOfBounds){
+            System.out.println("Tried to cast a spell out of reach.");
+            return new Spells();
+        }
+    }
 }
