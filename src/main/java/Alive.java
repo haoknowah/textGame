@@ -7,7 +7,7 @@ public abstract class Alive {
     protected int lvl;
     protected int mag;
     protected int xp;
-    protected String[] slots;
+    protected Spells[] slots;
     protected int totalSlots;
     public void lvlup(){
         this.lvl = this.lvl + 1;
@@ -74,13 +74,17 @@ public abstract class Alive {
     public void setMag(int x){
         this.mag = x;
     }
-    public String[] initSlots(int lev){
-        return slots = new String[(int)((lev / 5) + 1)];
+    public Spells[] initSlots(int lev){
+        this.totalSlots = (int)((lev / 5) + 1);
+        return slots = new Spells[totalSlots];
     }
-    public void setSlots(int x){
-        this.slots = x;
+    public void setSlots(Spells spl, int i){
+        this.slots[i] = spl;
     }
     public void setLvl(int x){
         this.lvl = x;
+    }
+    public int getTotalSlots(){
+        return this.totalSlots;
     }
 }

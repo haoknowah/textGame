@@ -19,6 +19,9 @@ public class Enemy extends Alive{
     public void setRegen(int x){
         this.regen = x;
     }
+    public int getRegen(){
+        return regen;
+    }
     public void mkBoss(){
         if(this.boss != true){
             this.boss = true;

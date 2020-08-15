@@ -82,6 +82,9 @@ public class App {
             case 1:
             int atkRoll = rand.nextInt(20);
             int dmg = -(player.getAtk() + atkRoll - npc.getDef());
+            if(dmg < 0){
+                dmg = 0;
+            }
             npcAlive = npc.damageHp(dmg);
             System.out.println("Dealt " + -dmg + " damage.");
             break;
@@ -105,6 +108,12 @@ public class App {
         if(npcAlive == true){   
             int eAtkRoll = rand.nextInt(20);
             int eDmg = -(npc.getAtk() + eAtkRoll - player.getDef());
+            if(eDmg < 0){
+                eDmg = 0;
+            }
+            if(npc.getRegen() > 0){
+                npc.damageHp(npc.getRegen());
+            }
             playerAlive = player.damageHp(eDmg);
             System.out.println("Took " + -eDmg + " damage.");
         }

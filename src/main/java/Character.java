@@ -49,6 +49,8 @@ public class Character extends Alive{
         this.setAtk(1 + this.lvl + this.choices.get("atk"));
         this.setDef(this.lvl + this.choices.get("def"));
         this.setMag((int)(0.5 * this.lvl) + this.choices.get("mag"));
-        this.setSlots((int)(this.lvl / 5) + 1);
+        if(this.getTotalSlots() < (int)(this.lvl / 5) + 1){
+            System.out.println("New spell slot gained.");
+        }
     }
 }
