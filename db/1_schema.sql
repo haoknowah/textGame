@@ -22,3 +22,7 @@ CREATE TABLE dungeons
 );
 
 INSERT INTO dungeons VALUES("begin");
+CREATE VIEW opponents AS
+SELECT race, rhp, ratk, rdef, rmag
+FROM enemies
+WHERE env = "begin";
