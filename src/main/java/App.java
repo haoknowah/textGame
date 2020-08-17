@@ -4,7 +4,7 @@ import java.util.Properties;
 public class App {
 
     protected static Character player;
-    private boolean play;
+    private boolean gameOn;
     public static void main(String[] args)
     {
         Scanner in = new Scanner(System.in);
@@ -47,7 +47,17 @@ public class App {
                 }
                 break;
                 case 2:
-                
+                for(int i = 0; i < player.getTotalSlots() - 1; i++){
+                    System.out.println(player.getTotalSlots() - 1 - i
+                        + ":slots remain.");
+                    //spell selection
+                    String select;
+                    try {
+                        select = in.nextLine();
+                    } catch (Exception InputMismatchException) {
+                        System.out.println("Wrong input.");
+                    }
+                }
                 break;
             }
         }
