@@ -54,6 +54,48 @@ public class App {
         //save character info to database or file
         return gameConfig;
     }
+
+    /**
+     * Returns the damage the user's attack would inflict on the target.
+     * @param user the user of the attack
+     * @param target the target of the attack
+     * @param atkRoll a random value added to the damage
+     * @return an int representing the damage in negatives, no greater than 0
+     */
+    public static int generateAttackDamage(Alive user, Alive target, int atkRoll)
+    {
+        int dmg = (user.getAtk() + atkRoll - target.getDef());
+        return dmg >= 0? -dmg : 0;
+    }
+
+    /**
+     * Returns the damage the user's spell would inflict on the target.
+     * @param user the user of the spell
+     * @param target the target of the spell
+     * @param spell the spell used
+     * @param atkRoll a random value added to the damage
+     * @return an int representing the damage in negatives, no greater than 0
+     */
+    public static int generateSpellDamage(Alive user, Alive target, Spells spell, int atkRoll)
+    {
+        int mDmg = ((int) (user.getMag() * 0.75) + atkRoll - 
+            target.getDef() + spell.getDmg());
+        return mDmg >= 0? -mDmg : 0;
+    }
+
+    /**
+     * Returns the amount that the user's spell would heal.
+     * @param user the user of the spell
+     * @param spell the healing spell
+     * @return an int representing the amount healed, no less than 0.
+     */
+    public static int generateHealAmount(Alive user, Spells spell)
+    {
+        int heal = (int) (user.getMag() * 0.75) +
+        spell.getDmg();
+        return heal >= 0? heal : 0;
+    }
+
     static public void play(Scanner in, Properties config){
         Random rand = new Random();
         boolean playerAlive = true;
@@ -81,10 +123,7 @@ public class App {
         switch(menuSelect){
             case 1:
             int atkRoll = rand.nextInt(20);
-            int dmg = -(player.getAtk() + atkRoll - npc.getDef());
-            if(dmg < 0){
-                dmg = 0;
-            }
+            int dmg = generateAttackDamage(player, npc, atkRoll);
             npcAlive = npc.damageHp(dmg);
             System.out.println("Dealt " + -dmg + " damage.");
             break;
@@ -99,19 +138,15 @@ public class App {
                 System.out.println("Enter a number you dolt.");
             }
             Spells chose = player.getSlot(spellSelect);
-            if(chose.getBuff() == false){
+            if(chose.getBuff() == false)
+            {
                 int mAtkRoll = rand.nextInt(20);
-                int mDmg = -((int) (player.getMag() * 0.75) + mAtkRoll - 
-                    npc.getDef() + chose.getDmg());
-                if(mDmg < 0){
-                    mDmg = 0;
-                }
+                int mDmg = generateSpellDamage(player, npc, chose, mAtkRoll);
                 npcAlive = npc.damageHp(mDmg);
                 System.out.println("Dealt " + -mDmg + " damage.");
             }
             else{
-                int heal = (int) (player.getMag() * 0.75) +
-                     chose.getDmg();
+                int heal = generateHealAmount(player, chose);
                 player.damageHp(heal);
                 System.out.println("Healed " + heal + " damage.");
             }
@@ -133,10 +168,7 @@ public class App {
         }
         if(npcAlive == true){   
             int eAtkRoll = rand.nextInt(20);
-            int eDmg = -(npc.getAtk() + eAtkRoll - player.getDef());
-            if(eDmg < 0){
-                eDmg = 0;
-            }
+            int eDmg = generateAttackDamage(npc, player, eAtkRoll);
             if(npc.getRegen() > 0){
                 npc.damageHp(npc.getRegen());
             }
