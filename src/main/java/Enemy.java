@@ -1,15 +1,18 @@
 public class Enemy extends Alive{
     protected boolean boss;
     protected int regen;
-    public Enemy(int lv, boolean bos){
+    public Enemy(int lv, boolean bos, int rhp, int ratk, int rdef, int rmag){
         this.setLvl(lv);
         this.boss = bos;
         this.regen = 0;
-        this.setMhp(10 + (2 * this.lvl));
-        this.setHp(10 + (2 * this.lvl));
-        this.setAtk(1 + this.lvl);
-        this.setDef(this.lvl);
-        this.setMag((int)(0.5 * this.lvl));
+        this.setMhp(10 + (2 * this.lvl) + rhp);
+        this.setHp(10 + (2 * this.lvl) + rhp);
+        this.setAtk(1 + this.lvl + ratk);
+        this.setDef(this.lvl + rdef);
+        this.setMag((int)(0.5 * this.lvl) + rmag);
+        if(this.getMag() < 0){
+            this.setMag(0);
+        }
         this.setXp(0, false);
         this.initSlots(this.getLvl());
     }    
