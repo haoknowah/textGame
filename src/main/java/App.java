@@ -1,6 +1,7 @@
 import java.util.Random;
 import java.util.Scanner;
 import java.util.Properties;
+import java.util.logging.Logger;
 public class App {
 
     protected static Character player;
@@ -35,7 +36,6 @@ public class App {
             if(menuSelect <0 || menuSelect > 2){
                 System.out.println("Invalid choice.");
             }
-            System.out.println(menuSelect);
             switch(menuSelect){
                 case 1:
                 int dun = 0;
@@ -69,7 +69,7 @@ public class App {
             boolean cont = true;
             Enemy npc = nme.initEnemy(dist);
             boolean npcAlive = true;
-            while(cont == true || playerAlive == true || npcAlive == true){
+            while(cont == true && playerAlive == true && npcAlive == true){
                 System.out.println("Enemy: " + npc.getName() + " " +
                     + (int)((float)npc.getHp()/(float)npc.getMhp()
                     * 100) + "%");
@@ -100,7 +100,7 @@ public class App {
                     break;
                     case 2:
                     int spellSelect = -1;
-                    for(int i = 0; i < player.getTotalSlots() - 1; i++){
+                    for(int i = 0; i <= player.getTotalSlots() - 1; i++){
                         System.out.println(i + ": " + player.getSlot(i).getName());
                     }
                     try {
@@ -161,10 +161,16 @@ public class App {
                     if(player.getXp() >= 10 * player.getLvl()){
                         levelUp(in);
                     }
+                    System.out.println(npc.getName() + " has been defeated.");
+                    System.out.println("Type c to continue.");
+                    String c = in.nextLine();
+                    if(c.equalsIgnoreCase("c") != true){
+                        cont = false;
+                    }
                 }
             }
             boolean yub = false;
-            while(yub == false && (dist < nme.getLeng() || cont == false || playerAlive == false)){
+            while(yub == false && (dist > nme.getLeng() || cont == false || playerAlive == false)){
                 System.out.println("Go again? y/n");
                 String input = in.nextLine();
                 if(input.equalsIgnoreCase("y")){
@@ -196,14 +202,14 @@ public class App {
         player.updateChar();
     }
     public static void spellSelect(Scanner in){
-        for(int i = 0; i < player.getTotalSlots() - 1; i++){
-            System.out.println(player.getTotalSlots() - 1 - i
+        for(int i = 0; i <= player.getTotalSlots() - 1; i++){
+            System.out.println(player.getTotalSlots() - i
                 + ":slots remain.");
             goetia.printList();
             String select;
             try {
                 select = in.nextLine();
-                if(goetia.spellCheck(select, player, i) == true){
+                if(goetia.spellCheck(select, player, i) == false){
                     i = i - 1;
                 }
             } catch (Exception InputMismatchException) {

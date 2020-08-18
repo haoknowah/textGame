@@ -1,6 +1,4 @@
 import java.util.HashMap;
-import java.util.logging.Logger;
-import java.util.Arrays;
 public class Character extends Alive{
     
     public HashMap<String, Integer> choices;

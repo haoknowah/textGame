@@ -22,7 +22,6 @@ public class EnemyDAO {
             int min = locInfo.getInt("lmin");
             int max = locInfo.getInt("lmax");
             int leng = locInfo.getInt("leng");
-            System.out.println(min + max + leng);
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, dungeon);
             ResultSet rs = statement.executeQuery();
