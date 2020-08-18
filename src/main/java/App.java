@@ -50,20 +50,7 @@ public class App {
                 }
                 break;
                 case 2:
-                for(int i = 0; i < player.getTotalSlots() - 1; i++){
-                    System.out.println(player.getTotalSlots() - 1 - i
-                        + ":slots remain.");
-                    goetia.printList();
-                    String select;
-                    try {
-                        select = in.nextLine();
-                        if(goetia.spellCheck(select, player, i) == true){
-                            i = i - 1;
-                        }
-                    } catch (Exception InputMismatchException) {
-                        System.out.println("Wrong input.");
-                    }
-                }
+                spellSelect(in);
                 break;
             }
             nme = new EnemyDAO("begin");
@@ -177,11 +164,16 @@ public class App {
                 }
             }
             boolean yub = false;
-            while(yub == false && dist < nme.getLeng()){
+            while(yub == false && (dist < nme.getLeng() || cont == false || playerAlive == false)){
                 System.out.println("Go again? y/n");
                 String input = in.nextLine();
                 if(input.equalsIgnoreCase("y")){
                     yub = true;
+                    System.out.println("Type r to reprep spells");
+                    String r = in.nextLine();
+                    if(r.equalsIgnoreCase("y")){
+                        spellSelect(in);
+                    }
                 }
                 if(input.equalsIgnoreCase("n")){
                     yub = true;
@@ -202,5 +194,21 @@ public class App {
             up = player.statUp(in.nextLine());
         }
         player.updateChar();
+    }
+    public static void spellSelect(Scanner in){
+        for(int i = 0; i < player.getTotalSlots() - 1; i++){
+            System.out.println(player.getTotalSlots() - 1 - i
+                + ":slots remain.");
+            goetia.printList();
+            String select;
+            try {
+                select = in.nextLine();
+                if(goetia.spellCheck(select, player, i) == true){
+                    i = i - 1;
+                }
+            } catch (Exception InputMismatchException) {
+                System.out.println("Wrong input.");
+            }
+        }
     }
 }

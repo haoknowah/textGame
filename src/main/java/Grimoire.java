@@ -18,7 +18,7 @@ public class Grimoire {
                 int dmg = rs.getInt("dmg");
                 boolean buff = rs.getBoolean("buff");
                 boolean debuff = rs.getBoolean("debuff");
-                String name = rs.getString("name");
+                String name = rs.getString("spell");
                 grim.add(new Spells(dmg, name, buff, debuff));
             }
         }
