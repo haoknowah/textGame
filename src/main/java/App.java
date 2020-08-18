@@ -2,12 +2,16 @@ import java.util.Random;
 import java.util.Scanner;
 import java.util.logging.FileHandler;
 import java.util.Properties;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 public class App {
 
     protected static Character player;
     private static boolean gameOn;
     protected static EnemyDAO nme;
     protected static Grimoire goetia;
+    private static ExecutorService threadPool = Executors.newFixedThreadPool(10);
     java.util.logging.Logger logger =  java.util.logging.Logger.getLogger(this.getClass().getName());
     public App(){
         try{
@@ -22,6 +26,7 @@ public class App {
     public static void main(String[] args)
     {
         Scanner in = new Scanner(System.in);
+        Runtime.getRuntime().addShutdownHook(new Thread(() -> shutdown()));
         Properties config = setupGameConfig(in);
         play(in, config);
     }
@@ -227,5 +232,16 @@ public class App {
                 System.out.println("Wrong input.");
             }
         }
+    }
+    private static Object shutdown() {
+         // scan.close(); // Does Java do this on its own when ^C is pressed?
+        try {
+            TimeUnit.SECONDS.sleep(1);
+        } catch (InterruptedException e) {
+            System.err.println("Failed to pause for 1 seconds.");
+            e.printStackTrace();
+        }
+        threadPool.shutdown();
+        return null;
     }
 }
