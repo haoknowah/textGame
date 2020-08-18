@@ -163,6 +163,11 @@ public class App {
                 }
                 if(npcAlive == false){
                     dist = dist + 1;
+                    int xp = npc.getLvl() * 5 / player.getLvl();
+                    player.setXp(xp, false);
+                    if(player.getXp() >= 10 * player.getLvl()){
+                        levelUp(in);
+                    }
                 }
             }
             boolean yub = false;
@@ -182,5 +187,14 @@ public class App {
                 }
             }
         }
+    }
+    public static void levelUp(Scanner in){
+        player.lvlup();
+        boolean up = false;
+        while(up == false){
+            System.out.println("Enter stat to increase: atk/def/mag");
+            up = player.statUp(in.nextLine());
+        }
+        player.updateChar();
     }
 }
