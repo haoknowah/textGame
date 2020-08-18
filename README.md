@@ -1,1 +1,2 @@
 # project0-Noah
+Simple text based rpg where you travel through a dungeon and defeat monsters as you attempt to complete it. You will select a dungeon at the start (currently only 1) which has a set length, difficulty, and types of enemies. You will also fill your character's availlable spell slots if you so chooose, which are expended when cast. 
