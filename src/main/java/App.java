@@ -6,6 +6,7 @@ public class App {
     protected static Character player;
     private static boolean gameOn;
     protected static EnemyDAO nme;
+    protected static Grimoire goetia;
     public static void main(String[] args)
     {
         Scanner in = new Scanner(System.in);
@@ -14,6 +15,7 @@ public class App {
     }
     static public Properties setupGameConfig(Scanner in){
         Properties gameConfig = new Properties();
+        goetia = new Grimoire();
         gameConfig.setProperty("dungeon", "begin");
         int menuSelect = -1;
         System.out.print("Enter character name: ");
@@ -51,10 +53,13 @@ public class App {
                 for(int i = 0; i < player.getTotalSlots() - 1; i++){
                     System.out.println(player.getTotalSlots() - 1 - i
                         + ":slots remain.");
-                    //spell selection
+                    goetia.printList();
                     String select;
                     try {
                         select = in.nextLine();
+                        if(goetia.spellCheck(select, player, i) == true){
+                            i = i - 1;
+                        }
                     } catch (Exception InputMismatchException) {
                         System.out.println("Wrong input.");
                     }
@@ -133,6 +138,7 @@ public class App {
                         player.damageHp(heal);
                         System.out.println("Healed " + heal + " damage.");
                     }
+                    player.setSlots(new Spells(), spellSelect);
                     break;
                     case 3:
                     System.out.println("LVL: " + npc.getLvl() + "| HP: "+ 
