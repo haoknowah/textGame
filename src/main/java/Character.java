@@ -1,7 +1,11 @@
 import java.util.HashMap;
+import java.util.logging.FileHandler;
+
 public class Character extends Alive{
     
     public HashMap<String, Integer> choices;
+    java.util.logging.Logger logger =  java.util.logging.Logger.getLogger(this.getClass().getName());
+
     public Character(){
         this.setLvl(1);
         this.setMhp(10 + (2 * this.getLvl()));
@@ -15,10 +19,19 @@ public class Character extends Alive{
         this.choices.put("atk", 0);
         this.choices.put("def", 0);
         this.choices.put("mag", 0);
+        try{
+            logger.setUseParentHandlers(false);
+            FileHandler fileHandle = new FileHandler("status.log");
+            logger.addHandler(fileHandle);
+        }
+        catch(Exception e){
+            logger.fine("Unable to build logger.");
+        }
     }
     public void lvlup(){
         this.setLvl(this.lvl + 1);
         this.setXp(0, true);
+        logger.info("This is for the log, not that one you perv.");
     }
     public boolean statUp(String stat){
         if(stat.equalsIgnoreCase("atk")){

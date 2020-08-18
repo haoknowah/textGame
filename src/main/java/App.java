@@ -1,13 +1,24 @@
 import java.util.Random;
 import java.util.Scanner;
+import java.util.logging.FileHandler;
 import java.util.Properties;
-import java.util.logging.Logger;
 public class App {
 
     protected static Character player;
     private static boolean gameOn;
     protected static EnemyDAO nme;
     protected static Grimoire goetia;
+    java.util.logging.Logger logger =  java.util.logging.Logger.getLogger(this.getClass().getName());
+    public App(){
+        try{
+            logger.setUseParentHandlers(false);
+            FileHandler fileHandle = new FileHandler("status.log");
+            logger.addHandler(fileHandle);
+        }
+        catch(Exception e){
+            logger.fine("Unable to build logger.");
+        }
+    }
     public static void main(String[] args)
     {
         Scanner in = new Scanner(System.in);
@@ -142,7 +153,7 @@ public class App {
                     }
                     break;
                 }
-                if(npcAlive == true){   
+                if(npcAlive == true && cont == true){   
                     int eAtkRoll = rand.nextInt(20);
                     int eDmg = -(npc.getAtk() + eAtkRoll - player.getDef());
                     if(eDmg > 0){
