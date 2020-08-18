@@ -45,7 +45,6 @@ public abstract class Alive {
     public boolean damageHp(int dmg){
         this.hp = this.hp + dmg;
         if(hp <= 0){
-            System.out.println("Game Over");
             return false;
         }
         if(hp > this.mhp){

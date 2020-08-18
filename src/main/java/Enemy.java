@@ -1,9 +1,11 @@
 public class Enemy extends Alive{
     protected boolean boss;
     protected int regen;
-    public Enemy(int lv, boolean bos, int rhp, int ratk, int rdef, int rmag){
+    protected String name;
+    public Enemy(int lv, String name, boolean bos, int rhp, int ratk, int rdef, int rmag){
         this.setLvl(lv);
         this.boss = bos;
+        this.name = name;
         this.regen = 0;
         this.setMhp(10 + (2 * this.lvl) + rhp);
         this.setHp(10 + (2 * this.lvl) + rhp);
@@ -18,6 +20,9 @@ public class Enemy extends Alive{
     }    
     public boolean bossStat(){
         return this.boss;
+    }
+    public String getName(){
+        return this.name;
     }
     public void setRegen(int x){
         this.regen = x;
