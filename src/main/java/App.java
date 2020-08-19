@@ -44,6 +44,7 @@ public class App {
         String name = in.nextLine();
         gameConfig.setProperty("player", name);
         player = new Character();
+        player.setSlots(new Spells(), 0);
         //following is the menu for the setup
         while(menuSelect != 0){
             System.out.println("1: Change dungeon (Current == " +
