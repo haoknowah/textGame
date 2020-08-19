@@ -209,10 +209,11 @@ public class App {
                 String input = in.nextLine();
                 if(input.equalsIgnoreCase("y")){
                     yub = true;
+                    player.setHp(player.getMhp());
                     System.out.println("Type r to reprep spells");
                     String r = in.nextLine();
                     dist = 1;
-                    if(r.equalsIgnoreCase("y")){
+                    if(r.equalsIgnoreCase("r")){
                         spellSelect(in);
                     }
                 }
