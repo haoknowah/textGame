@@ -6,7 +6,11 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 public class App {
-
+    //@param player = player character object thatt contains player stats
+    //@param gameOn = boolean that determines if the game
+    //@param nme = EnemyDAO object that accesses enemies from database and initiallizes one for combat
+    //@param goetia = object that holds the spell list
+    //@param threadPool = for multithreading and closing the program
     protected static Character player;
     private static boolean gameOn;
     protected static EnemyDAO nme;
@@ -31,6 +35,7 @@ public class App {
         play(in, config);
     }
     static public Properties setupGameConfig(Scanner in){
+        //@param gameConfig = initiallizes player and selects dungeon and spells
         Properties gameConfig = new Properties();
         goetia = new Grimoire();
         gameConfig.setProperty("dungeon", "begin");
@@ -39,6 +44,7 @@ public class App {
         String name = in.nextLine();
         gameConfig.setProperty("player", name);
         player = new Character();
+        //following is the menu for the setup
         while(menuSelect != 0){
             System.out.println("1: Change dungeon (Current == " +
                 gameConfig.getProperty("dungeon") + ")");
@@ -75,6 +81,12 @@ public class App {
         return gameConfig;
     }
     static public void play(Scanner in, Properties config){
+        //@param rand = creates random value to add some rng to damage calculation
+        //@param menuSelect = selects what combat option to take
+        //@param cont = boolean that determines whether to continue fighting due will, ie whether or not the player tries to flee
+        //@param playerAlive = boolean that says if player hp is still positive
+        //@param npcAlive = same as above for enemy
+        //@param npc = object that holds stats for current opponent
         Random rand = new Random();
         gameOn = true;
         int dist = 1;
@@ -132,6 +144,9 @@ public class App {
                         if(mDmg > 0){
                             mDmg = 0;
                         }
+                        if(chose.getName().equalsIgnoreCase("empty")){
+                            mDmg = 0;
+                        }
                         npcAlive = npc.damageHp(mDmg);
                         System.out.println("Dealt " + -mDmg + " damage.");
                     }
@@ -185,6 +200,8 @@ public class App {
                     }
                 }
             }
+            //@param yub = continues the loop until proper input is recieved
+            //upcoming loop activates if player beat the dungeon, quit, or died and asks if they want to go again
             boolean yub = false;
             while(yub == false && (dist > nme.getLeng() || cont == false || playerAlive == false)){
                 System.out.println("Go again? y/n");
@@ -193,6 +210,7 @@ public class App {
                     yub = true;
                     System.out.println("Type r to reprep spells");
                     String r = in.nextLine();
+                    dist = 1;
                     if(r.equalsIgnoreCase("y")){
                         spellSelect(in);
                     }
@@ -209,6 +227,7 @@ public class App {
         }
     }
     public static void levelUp(Scanner in){
+        //this function levels up the player
         player.lvlup();
         boolean up = false;
         while(up == false){

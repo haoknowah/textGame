@@ -77,7 +77,12 @@ public abstract class Alive {
         return slots = new Spells[totalSlots];
     }
     public void setSlots(Spells spl, int i){
-        this.slots[i] = spl;
+        try {
+            this.slots[i] = spl;
+        }
+        catch(Exception arrayIndexOutOfBoundsException){
+            System.out.println("Spell failed.");
+        }
     }
     public void setLvl(int x){
         this.lvl = x;
